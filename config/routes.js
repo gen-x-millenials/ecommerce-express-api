@@ -15,6 +15,12 @@ module.exports = require('lib/wiring/routes')
 .resources('products')
 .resources('profiles')
 
+//admin panel
+.post('/admin-sign-up', 'admins#signup')
+.post('/admin-sign-in', 'admins#signin')
+.delete('/admin-sign-out/:id', 'admins#signout')
+.resources('admins', { only: ['index', 'show'] })
+
 // users of the app have special requirements
 .post('/sign-up', 'users#signup')
 .post('/sign-in', 'users#signin')

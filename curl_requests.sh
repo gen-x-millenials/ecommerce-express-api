@@ -95,3 +95,26 @@ curl --include --request POST http://localhost:3000/profiles \
         }]
     }
   }'
+
+  # create admin (deactivate after creation)
+
+  curl --include --request POST http://localhost:3000/admin-sign-up \
+    --header "Content-Type: application/json" \
+    --data '{
+      "credentials": {
+        "email": "admin",
+        "password": "adpass",
+        "password_confirmation": "adpass"
+      }
+    }'
+
+    # admin sign in
+
+    curl --include --request POST http://localhost:3000/admin-sign-in \
+      --header "Content-Type: application/json" \
+      --data '{
+        "credentials": {
+          "email": "shireen_admin",
+          "password": "p"
+        }
+      }'
