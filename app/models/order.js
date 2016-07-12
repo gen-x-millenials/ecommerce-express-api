@@ -1,8 +1,10 @@
 'use strict';
 
-const mongoose = new mongoose.Schema({
+const mongoose = require('mongoose');
+
+const orderSchema = new mongoose.Schema({
   items: {
-    type: array,
+    type: Array,
     required: true,
   },
   total: {
@@ -17,7 +19,7 @@ const mongoose = new mongoose.Schema({
   },
   token: {
     type: String,
-  }
+  },
   _owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -28,9 +30,9 @@ const mongoose = new mongoose.Schema({
     timestamps: true,
     toJSON: { virtuals: true },
   }
-});
+);
 
-productSchema.virtual('calculated_total').get(function() {
+orderSchema.virtual('calculated_total').get(function() {
   let front_total = this.total;
   if (!this.total) {
     return 'Error';
@@ -40,6 +42,6 @@ productSchema.virtual('calculated_total').get(function() {
   }
 });
 
-let Product = mongoose.model.('Product', productSchema);
+let Order = mongoose.model('Order', orderSchema);
 
-module.exports = Product;
+module.exports = Order;

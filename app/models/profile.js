@@ -11,6 +11,7 @@ const profileSchema = new mongoose.Schema({
     surname: {
       type: String,
       required: true
+    }
     },
     addresses: {
       type: Array,
@@ -20,7 +21,6 @@ const profileSchema = new mongoose.Schema({
       ref: 'User',
       required: true,
     },
-  }
 
 });
 
