@@ -19,9 +19,9 @@ const show = (req, res, next) => {
 };
 
 const create = (req, res, next) => {
-  let order = Object.assign(req.body.order, {
-    _owner: req.currentUser._id,
-  });
+  let order = Object.assign(req.body.order
+    // , { _owner: req.currentUser._id,}
+  );
   Order.create(order)
     .then(order => res.json({ order }))
     .catch(err => next(err));

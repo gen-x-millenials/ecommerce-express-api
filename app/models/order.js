@@ -2,9 +2,16 @@
 
 const mongoose = require('mongoose');
 
+// items: [{
+//   _id: String,
+//   price: Number,
+//   quantity: Number,
+// }],
+
 const orderSchema = new mongoose.Schema({
   items: {
     type: Array,
+    default : [],
     required: true,
   },
   total: {
@@ -20,11 +27,11 @@ const orderSchema = new mongoose.Schema({
   token: {
     type: String,
   },
-  _owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
+  // _owner: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'User',
+  //   required: true,
+  // },
 },
   {
     timestamps: true,
