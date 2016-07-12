@@ -23,6 +23,12 @@ const create = (req, res, next) => {
     // , { _owner: req.currentUser._id,}
   );
   Order.create(order)
+    .then(function(order){
+      if (order.total_validation !== true ){
+        throw Error('Invalid Total')
+      }
+      return order
+    })
     .then(order => res.json({ order }))
     .catch(err => next(err));
 };
@@ -43,7 +49,9 @@ const update = (req, res, next) => {
 };
 
 const destroy = (req, res, next) => {
-  let search = { _id: req.params.id, _owner: req.currentUser._id };
+  let search = { _id: req.params.id
+    // , _owner: req.currentUser._id
+  };
   Order.findOne(search)
     .then(order => {
       if (!order) {

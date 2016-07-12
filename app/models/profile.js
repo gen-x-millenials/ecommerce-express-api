@@ -14,10 +14,10 @@ const profileSchema = new mongoose.Schema({
     }
     },
     addresses: {
-      type: String,
+      type: Array,
     },
     credit_cards: {
-      type: String,
+      type: Array,
     },
     _owner: {
       type: mongoose.Schema.Types.ObjectId,
