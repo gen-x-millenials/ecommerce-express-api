@@ -16,6 +16,9 @@ const profileSchema = new mongoose.Schema({
     addresses: {
       type: Array,
     },
+    credit_cards: {
+      type: Array,
+    },
     _owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
