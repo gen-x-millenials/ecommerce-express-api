@@ -19,9 +19,9 @@ const show = (req, res, next) => {
 };
 
 const create = (req, res, next) => {
-  let profile = Object.assign(req.body.profile, {
-    _owner: req.currentUser._id,
-  });
+  let profile = Object.assign(req.body.profile
+    // , {_owner: req.currentUser._id,}
+);
   Profile.create(profile)
     .then(profile => res.json({ profile }))
     .catch(err => next(err));

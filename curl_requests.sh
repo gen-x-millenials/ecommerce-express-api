@@ -71,3 +71,27 @@ curl --include --request POST http://localhost:3000/orders \
   "total": 65.00
 }
 }'
+
+
+# create profile
+curl --include --request POST http://localhost:3000/profiles \
+  --header "Content-Type: application/json" \
+  --data '{
+    "profile": {
+      "name": {
+        "given": "Shireen",
+        "surname": "Kheradpey"
+        },
+      "addresses": [
+        {
+          "street": "260 Brookline St",
+          "apt": "Apt 1",
+          "city/state": "Cambridge, MA"
+        },
+        {
+          "street": "45 Stuart St",
+          "apt": "Apt 1803",
+          "city/state": "Boston, MA"
+        }]
+    }
+  }'
