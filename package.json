@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "./bin/express server"
+    "start": "node server.js"
   },
   "engines": {
     "node": "4.4.0"
@@ -19,8 +19,14 @@
     "mongoose-unique-validator": "^1.0.2",
     "morgan": "~1.6.1",
     "multer": "^1.1.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "stripe": "^4.6.0"
   },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-concurrent": "^2.1.0",
