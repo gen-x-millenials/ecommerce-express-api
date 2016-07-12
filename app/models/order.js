@@ -2,12 +2,6 @@
 
 const mongoose = require('mongoose');
 
-// items: [{
-//   _id: String,
-//   price: Number,
-//   quantity: Number,
-// }],
-
 const orderSchema = new mongoose.Schema({
   items: {
     type: Array,
@@ -17,21 +11,32 @@ const orderSchema = new mongoose.Schema({
   total: {
     type: Number,
     required: true,
-  },
+    // validate:
+    //   (function(v) {
+    //     let itemsArray = this.items;
+    //     let sum = 0;
+    //     for(let i=0; i<itemsArray.length; i++){
+    //       sum += itemsArray[i].price * itemsArray[i].quantity;
+    //     }
+    //     return sum === v;
+    //   },
+    //   message: 'Improper total submitted');
+
+    },
   notes: {
     type: String,
   },
-  status: {
-    type: Boolean
+  paid: {
+    type: Boolean,
   },
   token: {
     type: String,
   },
-  // _owner: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'User',
-  //   required: true,
-  // },
+  _owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    // required: true,
+  },
 },
   {
     timestamps: true,
@@ -39,15 +44,34 @@ const orderSchema = new mongoose.Schema({
   }
 );
 
-orderSchema.virtual('calculated_total').get(function() {
+// orderSchema.virtual('calculated_total').get(function() {
+//   let front_total = this.total;
+//   if (!this.total) {
+//     return 'Error';
+//   }
+//   if (this.total > 0 ){
+//     return this.items.length;
+//   }
+// });
+
+orderSchema.virtual('total_validation').get(function() {
   let front_total = this.total;
   if (!this.total) {
     return 'Error';
   }
-  if (this.total > 0 ){
+  let itemsArray = this.items;
+  let sum = 0;
+  for(let i=0; i<itemsArray.length; i++){
+    sum += itemsArray[i].price * itemsArray[i].quantity;
+  }
+  if (front_total == sum ){
     return true;
+  } else {
+    return 'Error';
   }
 });
+
+
 
 let Order = mongoose.model('Order', orderSchema);
 

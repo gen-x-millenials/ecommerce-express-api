@@ -52,7 +52,7 @@ curl --include --request POST http://localhost:3000/products \
 "_owner": 5784661aeded3c13412fe4a5
 "items": [ { "product_id": 578496f937f3cb1e4f3b59d4, "quantity": 1, "price": 15.00}, { "product_id": 5784961b37f3cb1e4f3b59d3, "quantity": 2, "price": 25.00} ],
 
-# create order
+# create valid order
 curl --include --request POST http://localhost:3000/orders \
 --header "Content-Type: application/json" \
 --data '{
@@ -60,17 +60,42 @@ curl --include --request POST http://localhost:3000/orders \
   "items": [
     {
       "product_id": "578496f937f3cb1e4f3b59d4",
-      "price": 15,
+      "price": 10,
       "quantity": 1
     },
     {
       "product_id": "5784961b37f3cb1e4f3b59d3",
-      "price": 25,
+      "price": 20,
       "quantity": 2
     }],
-  "total": 65.00
+  "total": 50.00
 }
 }'
+
+# create an invalid order:
+
+curl --include --request POST http://localhost:3000/orders \
+--header "Content-Type: application/json" \
+--data '{
+"order": {
+  "items": [
+    {
+      "product_id": "578496f937f3cb1e4f3b59d4",
+      "price": 10,
+      "quantity": 1
+    },
+    {
+      "product_id": "5784961b37f3cb1e4f3b59d3",
+      "price": 20,
+      "quantity": 3
+    }],
+  "total": 50.00
+}
+}'
+
+# delete order
+
+curl --include --request DELETE http://localhost:3000/orders/578544c6cbfe29b083850394
 
 
 # create profile
@@ -95,3 +120,26 @@ curl --include --request POST http://localhost:3000/profiles \
         }]
     }
   }'
+
+  # create admin (deactivate after creation)
+
+  curl --include --request POST http://localhost:3000/admin-sign-up \
+    --header "Content-Type: application/json" \
+    --data '{
+      "credentials": {
+        "email": "admin",
+        "password": "adpass",
+        "password_confirmation": "adpass"
+      }
+    }'
+
+    # admin sign in
+
+    curl --include --request POST http://localhost:3000/admin-sign-in \
+      --header "Content-Type: application/json" \
+      --data '{
+        "credentials": {
+          "email": "shireen_admin",
+          "password": "p"
+        }
+      }'

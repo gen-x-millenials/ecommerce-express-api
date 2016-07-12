@@ -1,14 +1,14 @@
 'use strict';
 
-const debug = require('debug')('ecommerce-express-api:users');
+const debug = require('debug')('ecommerce-express-api:admins');
 
 const controller = require('lib/wiring/controller');
 const models = require('app/models');
-const User = models.user;
+const Admin = models.admin;
 
 const crypto = require('crypto');
 
-const authenticate = require('./concerns/authenticate');
+const authenticate = require('./concerns/authenticate_admin');
 
 const HttpError = require('lib/wiring/http-error');
 
@@ -26,17 +26,17 @@ const getToken = () =>
     )
   );
 
-const userFilter = { passwordDigest: 0, token: 0 };
+const adminFilter = { passwordDigest: 0, token: 0 };
 
 const index = (req, res, next) => {
-  User.find({}, userFilter)
-    .then(users => res.json({ users }))
+  Admin.find({}, adminFilter)
+    .then(admins => res.json({ admins }))
     .catch(err => next(err));
 };
 
 const show = (req, res, next) => {
-  User.findById(req.params.id, userFilter)
-    .then(user => user ? res.json({ user }) : next())
+  Admin.findById(req.params.id, adminFilter)
+    .then(admin => admin ? res.json({ admin }) : next())
     .catch(err => next(err));
 };
 
@@ -50,16 +50,16 @@ const makeErrorHandler = (res, next) =>
 
 const signup = (req, res, next) => {
   let credentials = req.body.credentials;
-  let user = { email: credentials.email, password: credentials.password };
+  let admin = { email: credentials.email, password: credentials.password };
   getToken().then(token =>
-    user.token = token
+    admin.token = token
   ).then(() =>
-    new User(user).save()
-  ).then(newUser => {
-    let user = newUser.toObject();
-    delete user.token;
-    delete user.passwordDigest;
-    res.json({ user });
+    new Admin(admin).save()
+  ).then(newAdmin => {
+    let admin = newAdmin.toObject();
+    delete admin.token;
+    delete admin.passwordDigest;
+    res.json({ admin });
   }).catch(makeErrorHandler(res, next));
 
 };
@@ -67,48 +67,48 @@ const signup = (req, res, next) => {
 const signin = (req, res, next) => {
   let credentials = req.body.credentials;
   let search = { email: credentials.email };
-  User.findOne(search
-  ).then(user =>
-    user ? user.comparePassword(credentials.password) :
+  Admin.findOne(search
+  ).then(admin =>
+    admin ? admin.comparePassword(credentials.password) :
           Promise.reject(new HttpError(404))
-  ).then(user =>
+  ).then(admin =>
     getToken().then(token => {
-      user.token = token;
-      return user.save();
+      admin.token = token;
+      return admin.save();
     })
-  ).then(user => {
-    user = user.toObject();
-    delete user.passwordDigest;
-    user.token = encodeToken(user.token);
-    res.json({ user });
+  ).then(admin => {
+    admin = admin.toObject();
+    delete admin.passwordDigest;
+    admin.token = encodeToken(admin.token);
+    res.json({ admin });
   }).catch(makeErrorHandler(res, next));
 };
 
 const signout = (req, res, next) => {
   getToken().then(token =>
-    User.findOneAndUpdate({
+    Admin.findOneAndUpdate({
       _id: req.params.id,
-      token: req.currentUser.token,
+      token: req.currentAdmin.token,
     }, {
       token,
     })
-  ).then((user) =>
-    user ? res.sendStatus(200) : next()
+  ).then((admin) =>
+    admin ? res.sendStatus(200) : next()
   ).catch(next);
 };
 
 const changepw = (req, res, next) => {
   debug('Changing password');
-  User.findOne({
+  Admin.findOne({
     _id: req.params.id,
-    token: req.currentUser.token,
-  }).then(user =>
-    user ? user.comparePassword(req.body.passwords.old) :
+    token: req.currentAdmin.token,
+  }).then(admin =>
+    admin ? admin.comparePassword(req.body.passwords.old) :
       Promise.reject(new HttpError(404))
-  ).then(user => {
-    user.password = req.body.passwords.new;
-    return user.save();
-  }).then((/* user */) =>
+  ).then(admin => {
+    admin.password = req.body.passwords.new;
+    return admin.save();
+  }).then((/* admin */) =>
     res.sendStatus(200)
   ).catch(makeErrorHandler(res, next));
 };
@@ -119,7 +119,6 @@ module.exports = controller({
   signup,
   signin,
   signout,
-  changepw,
 }, { before: [
   // { method: authenticate, except: ['signup', 'signin'] },
 ], });
