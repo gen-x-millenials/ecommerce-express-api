@@ -120,5 +120,5 @@ module.exports = controller({
   signin,
   signout,
 }, { before: [
-  // { method: authenticate, except: ['signup', 'signin'] },
+  { method: authenticate, except: ['signup', 'signin'] },
 ], });
