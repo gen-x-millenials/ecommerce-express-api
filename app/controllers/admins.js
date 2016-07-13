@@ -8,7 +8,7 @@ const Admin = models.admin;
 
 const crypto = require('crypto');
 
-const authenticate = require('./concerns/authenticate_admin');
+// const authenticate = require('./concerns/authenticate_admin');
 
 const HttpError = require('../../lib/wiring/http-error');
 

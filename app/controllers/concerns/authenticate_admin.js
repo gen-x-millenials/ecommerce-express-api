@@ -1,6 +1,6 @@
 'use strict';
 
-const models = require('app/models');
+const models = require('../../models');
 const Admin = models.admin;
 
 const MessageVerifier = require('../../../lib/wiring/message-verifier');
