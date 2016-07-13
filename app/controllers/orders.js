@@ -33,9 +33,9 @@ const create = (req, res, next) => {
   Order.create(order)
     .then(function(order){
       if (order.total_validation !== true ){
-        throw Error('Invalid Total')
+        throw Error('Invalid Total');
       }
-      return order
+      return order;
     })
     .then(order => res.json({ order }))
     .catch(err => next(err));
@@ -43,7 +43,7 @@ const create = (req, res, next) => {
 
 const createCharge = (req, res, next) => {
   Order.find()
-    .then(() => res.sendStatus(200));
+    .then(() => res.sendStatus(200))
     .catch(err => next(err));
 };
 
