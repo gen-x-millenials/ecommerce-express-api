@@ -1,1 +1,1 @@
-web: node './bin/express server';
+web: node server.js;
