@@ -15,6 +15,9 @@ module.exports = require('../lib/wiring/routes')
 .resources('products')
 .resources('profiles')
 
+//uploads
+.resources('uploads')
+
 //admin panel
 .post('/admin-sign-up', 'admins#signup')
 .post('/admin-sign-in', 'admins#signin')
