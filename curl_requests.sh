@@ -1,6 +1,6 @@
 # sign up
 
-curl --include --request POST https://brewtiq-api.herokuapp.com/sign-up \
+curl --include --request POST https://brewtiq-api.herokuapp.com/sign-in \
   --header "Content-Type: application/json" \
   --data '{
     "credentials": {
@@ -12,7 +12,7 @@ curl --include --request POST https://brewtiq-api.herokuapp.com/sign-up \
 
 #sign in
 
-curl --include --request POST http://localhost:3000/sign-in \
+curl --include --request POST https://brewtiq-api.herokuapp.com/sign-in \
   --header "Content-Type: application/json" \
   --data '{
     "credentials": {
@@ -46,6 +46,15 @@ curl --include --request POST https://brewtiq-api.herokuapp.com/products \
     "category": "beer",
     "image": "https://www.gianteagle.com/ProductImages/PRODUCT_NODE_59/80660000060.jpg",
     "price": 14.99
+  }
+}'
+
+curl --include --request PATCH https://brewtiq-api.herokuapp.com/products/578681d8775cb41200ac358b \
+--header "Content-Type: application/json" \
+--data '{
+  "product": {
+    "image": "http://sr1.wine-searcher.net/images/labels/11/20/silence-of-the-lambs-the-cannibal-chianti-docg-tuscany-italy-10671120.jpg",
+    "price": 13
   }
 }'
 

@@ -28,7 +28,9 @@ const create = (req, res, next) => {
 };
 
 const update = (req, res, next) => {
-  let search = { _id: req.params.id, _owner: req.currentUser._id };
+  let search = { _id: req.params.id
+    // , _owner: req.currentUser._id 
+  };
   Product.findOne(search)
     .then(product => {
       if (!product) {
