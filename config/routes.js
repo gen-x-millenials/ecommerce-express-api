@@ -14,9 +14,11 @@ module.exports = require('lib/wiring/routes')
 .resources('orders')
 .resources('products')
 .resources('profiles')
+.resources('carts')
 
 //custom routes
 .get('/owner_orders/:owner', 'orders#showUserOrders')
+.get('/owner_carts/:owner', 'carts#showUserCarts')
 .post('/charge', 'orders#createCharge')
 
 

@@ -85,6 +85,30 @@ curl --include --request POST https://brewtiq-api.herokuapp.com/orders \
 }
 }'
 
+
+curl --include --request POST http://localhost:3000/carts \
+--header "Content-Type: application/json" \
+--data '{
+"cart": {
+ "_owner": "5786a2ff2c29d3120029b418",
+ "items": [
+   {
+     "product_id": "578680a6775cb41200ac3589",
+     "name":"The Skinny Vine",
+     "price": 18,
+     "quantity": 1
+   },
+   {
+     "product_id": "5786814a775cb41200ac358a",
+     "price": 38,
+     "name":"2011 Shake Ridge Ranch Syrah",
+     "quantity": 1
+   }],
+ "total": 56
+}
+}'
+
+
 # create an invalid order:
 
 curl --include --request POST http://localhost:3000/orders \
