@@ -1,7 +1,7 @@
 'use strict';
 
 const controller = require('../../lib/wiring/controller');
-const models = require('app/models');
+const models = require('../models');
 const Example = models.example;
 
 const authenticate = require('./concerns/authenticate');
