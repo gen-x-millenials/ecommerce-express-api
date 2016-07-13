@@ -5,7 +5,7 @@ require('dotenv').load({
 
 const express = require('express');
 const app = express();
-const middleware = require('app/middleware');
+const middleware = require('./app/middleware');
 
 app.set('root', __dirname);
 
