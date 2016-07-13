@@ -11,7 +11,7 @@ app.set('root', __dirname);
 
 middleware.before(app);
 
-const routes = require('config/routes');
+const routes = require('./config/routes');
 
 app.use(routes.router);
 
