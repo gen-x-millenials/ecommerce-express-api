@@ -3,7 +3,7 @@
 const models = require('app/models');
 const User = models.user;
 
-const MessageVerifier = require('lib/wiring/message-verifier');
+const MessageVerifier = require('../../../lib/wiring/message-verifier');
 
 const decodeToken = (signedSecureToken) => {
   const mv = new MessageVerifier('secure-token', process.env.SECRET_KEY);

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = require('lib/wiring/routes')
+module.exports = require('../lib/wiring/routes')
 
 // create routes
 

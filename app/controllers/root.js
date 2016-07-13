@@ -1,6 +1,6 @@
 'use strict';
 
-const controller = require('lib/wiring/controller');
+const controller = require('../../lib/wiring/controller');
 
 /* GET home page. */
 const root = (req, res) => {

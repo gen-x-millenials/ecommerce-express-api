@@ -2,7 +2,7 @@
 
 const debug = require('debug')('ecommerce-express-api:admins');
 
-const controller = require('lib/wiring/controller');
+const controller = require('../../lib/wiring/controller');
 const models = require('app/models');
 const Admin = models.admin;
 
@@ -10,9 +10,9 @@ const crypto = require('crypto');
 
 const authenticate = require('./concerns/authenticate_admin');
 
-const HttpError = require('lib/wiring/http-error');
+const HttpError = require('../../lib/wiring/http-error');
 
-const MessageVerifier = require('lib/wiring/message-verifier');
+const MessageVerifier = require('../../lib/wiring/message-verifier');
 
 const encodeToken = (token) => {
   const mv = new MessageVerifier('secure-token', process.env.SECRET_KEY);

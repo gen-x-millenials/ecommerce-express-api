@@ -7,7 +7,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const loader = require('lib/wiring/loader');
+const loader = require('../../lib/wiring/loader');
 
 const corsOptions = {
   origin: process.env.CLIENT_URL || 'http://localhost:8080',
