@@ -49,12 +49,11 @@ curl --include --request POST https://brewtiq-api.herokuapp.com/products \
   }
 }'
 
-curl --include --request PATCH https://brewtiq-api.herokuapp.com/products/578681d8775cb41200ac358b \
+curl --include --request PATCH https://brewtiq-api.herokuapp.com/products/5786876f775cb41200ac3590 \
 --header "Content-Type: application/json" \
 --data '{
   "product": {
-    "image": "http://sr1.wine-searcher.net/images/labels/11/20/silence-of-the-lambs-the-cannibal-chianti-docg-tuscany-italy-10671120.jpg",
-    "price": 13
+    "price": 15
   }
 }'
 
@@ -68,19 +67,21 @@ curl --include --request POST https://brewtiq-api.herokuapp.com/orders \
 --header "Content-Type: application/json" \
 --data '{
 "order": {
- "_owner": "57867e7b1e37a312003867a7",
+ "_owner": "5786a2ff2c29d3120029b418",
  "items": [
    {
      "product_id": "578680a6775cb41200ac3589",
+     "name":"The Skinny Vine",
      "price": 18,
      "quantity": 1
    },
    {
-     "product_id": "578681d8775cb41200ac358b",
-     "price": 13,
+     "product_id": "5786814a775cb41200ac358a",
+     "price": 38,
+     "name":"2011 Shake Ridge Ranch Syrah",
      "quantity": 1
    }],
- "total": 31
+ "total": 56
 }
 }'
 
