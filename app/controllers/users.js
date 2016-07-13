@@ -3,7 +3,7 @@
 const debug = require('debug')('ecommerce-express-api:users');
 
 const controller = require('../../lib/wiring/controller');
-const models = require('app/models');
+const models = require('../models');
 const User = models.user;
 
 const crypto = require('crypto');

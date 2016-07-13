@@ -5,7 +5,7 @@ const controller = require('lib/wiring/controller');
 // const multer = middleware.multer;
 const multer = require('app/middleware').multer;
 
-const models = require('app/models');
+const models = require('../models');
 const Upload = models.upload;
 
 const uploader = require('lib/aws-s3-upload');
