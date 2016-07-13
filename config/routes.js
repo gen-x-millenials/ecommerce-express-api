@@ -16,7 +16,7 @@ module.exports = require('../lib/wiring/routes')
 .resources('profiles')
 
 //uploads
-.resources('uploads')
+.resources('uploads', { only: ['index', 'show', 'create'] })
 
 //admin panel
 .post('/admin-sign-up', 'admins#signup')

@@ -8,7 +8,7 @@ const multer = require('app/middleware').multer;
 const models = require('app/models');
 const Upload = models.upload;
 
-const uploader = require('lib/aws-s3-upload')
+const uploader = require('lib/aws-s3-upload');
 
 // const authenticate = require('./concerns/authenticate');
 
@@ -25,22 +25,19 @@ const show = (req, res, next) => {
 };
 
 const create = (req, res, next) => {
-  // let upload = {
-  //   comment: req.body.upload.comment,
-  //   file: req.file,
-  // };
-  // res.json({upload})
 
+  console.log('create function reached');
   uploader.awsUpload(req.file.buffer) //multer is what creates .file key and provides buffer
   .then((response)=> {
-    // return Object.assign({ // probably necessary for auth and attaching user id
+    console.log('the response is '+response)
+    console.log(data);
       return {
         comment: req.body.upload.comment,
-        location: response.Location
+        location: res.Location
       };
   })
   .then((upload)=> {
-    return Upload.create(upload)
+    return Upload.create(upload);
   })
   .then(upload => res.json({ upload }))
   .catch(err => next(err));
@@ -83,5 +80,5 @@ module.exports = controller({
   // destroy,
 }, { before: [
   // { method: authenticate, except: ['index', 'show'] },
-  {method: multer.single('upload[file]'), only:['create']}
+  { method: multer.single('upload[file]'), only:['create'] }
 ], });
