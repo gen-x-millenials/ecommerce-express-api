@@ -54,22 +54,24 @@ curl --include --request POST https://brewtiq-api.herokuapp.com/products \
 "items": [ { "product_id": 578496f937f3cb1e4f3b59d4, "quantity": 1, "price": 15.00}, { "product_id": 5784961b37f3cb1e4f3b59d3, "quantity": 2, "price": 25.00} ],
 
 # create valid order
-curl --include --request POST http://localhost:3000/orders \
+
+curl --include --request POST https://brewtiq-api.herokuapp.com/orders \
 --header "Content-Type: application/json" \
 --data '{
 "order": {
-  "items": [
-    {
-      "product_id": "578496f937f3cb1e4f3b59d4",
-      "price": 10,
-      "quantity": 1
-    },
-    {
-      "product_id": "5784961b37f3cb1e4f3b59d3",
-      "price": 20,
-      "quantity": 2
-    }],
-  "total": 50.00
+ "_owner": "57867e7b1e37a312003867a7",
+ "items": [
+   {
+     "product_id": "578680a6775cb41200ac3589",
+     "price": 18,
+     "quantity": 1
+   },
+   {
+     "product_id": "578681d8775cb41200ac358b",
+     "price": 13,
+     "quantity": 1
+   }],
+ "total": 31
 }
 }'
 
