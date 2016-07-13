@@ -1,8 +1,14 @@
 'use strict';
 
-require('dotenv').config();
 const mongoose = require('mongoose');
-const uri = process.env.MONGOLAB_URI || 'mongodb://localhost/ecommerce-api';
+
+let uri;
+if (process.env.NODE_ENV === 'production') {
+  uri = process.env.MONGODB_URI;
+} else {
+  uri = 'mongodb://localhost/ecommerce-express-api';
+}
+
 mongoose.Promise = global.Promise;
 mongoose.connect(uri);
 
