@@ -15,6 +15,11 @@ module.exports = require('lib/wiring/routes')
 .resources('products')
 .resources('profiles')
 
+//custom routes
+.get('/owner_orders/:owner', 'orders#showUserOrders')
+.post('/charge', 'orders#createCharge')
+
+
 //admin panel
 .post('/admin-sign-up', 'admins#signup')
 .post('/admin-sign-in', 'admins#signin')

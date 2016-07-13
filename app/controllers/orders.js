@@ -18,6 +18,14 @@ const show = (req, res, next) => {
     .catch(err => next(err));
 };
 
+const showUserOrders = (req, res, next) => {
+ Order.find({
+   _owner: req.params.owner,
+ })
+   .then(orders => res.json({ orders }))
+   .catch(err => next(err));
+};
+
 const create = (req, res, next) => {
   let order = Object.assign(req.body.order
     // , { _owner: req.currentUser._id,}
@@ -25,11 +33,17 @@ const create = (req, res, next) => {
   Order.create(order)
     .then(function(order){
       if (order.total_validation !== true ){
-        throw Error('Invalid Total')
+        throw Error('Invalid Total');
       }
-      return order
+      return order;
     })
     .then(order => res.json({ order }))
+    .catch(err => next(err));
+};
+
+const createCharge = (req, res, next) => {
+  Order.find()
+    .then(() => res.sendStatus(200))
     .catch(err => next(err));
 };
 
@@ -70,6 +84,8 @@ module.exports = controller({
   create,
   update,
   destroy,
+  showUserOrders,
+  createCharge,
 }, { before: [
   // { method: authenticate, except: ['index', 'show'] },
 ], });
