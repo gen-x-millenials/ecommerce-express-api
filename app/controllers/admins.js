@@ -48,21 +48,21 @@ const makeErrorHandler = (res, next) =>
       res.status(400).json({ error }) :
     next(error);
 
-const signup = (req, res, next) => {
-  let credentials = req.body.credentials;
-  let admin = { email: credentials.email, password: credentials.password };
-  getToken().then(token =>
-    admin.token = token
-  ).then(() =>
-    new Admin(admin).save()
-  ).then(newAdmin => {
-    let admin = newAdmin.toObject();
-    delete admin.token;
-    delete admin.passwordDigest;
-    res.json({ admin });
-  }).catch(makeErrorHandler(res, next));
-
-};
+// const signup = (req, res, next) => {
+//   let credentials = req.body.credentials;
+//   let admin = { email: credentials.email, password: credentials.password };
+//   getToken().then(token =>
+//     admin.token = token
+//   ).then(() =>
+//     new Admin(admin).save()
+//   ).then(newAdmin => {
+//     let admin = newAdmin.toObject();
+//     delete admin.token;
+//     delete admin.passwordDigest;
+//     res.json({ admin });
+//   }).catch(makeErrorHandler(res, next));
+//
+// };
 
 const signin = (req, res, next) => {
   let credentials = req.body.credentials;
@@ -116,7 +116,7 @@ const changepw = (req, res, next) => {
 module.exports = controller({
   index,
   show,
-  signup,
+  // signup,
   signin,
   signout,
 }, { before: [

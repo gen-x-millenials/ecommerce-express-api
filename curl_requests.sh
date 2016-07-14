@@ -4,11 +4,11 @@ curl --include --request POST https://brewtiq-api.herokuapp.com/admin-sign-up \
   --header "Content-Type: application/json" \
   --data '{
     "credentials": {
-      "email": "matt",
-      "password": "p",
-      "password_confirmation": "p"
+      "email": "jon",
+      "password": "jon",
+      "password_confirmation": "jon"
     }
-  }'
+}'
 
 #sign in
 

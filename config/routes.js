@@ -23,7 +23,7 @@ module.exports = require('lib/wiring/routes')
 
 
 //admin panel
-.post('/admin-sign-up', 'admins#signup')
+// .post('/admin-sign-up', 'admins#signup')
 .post('/admin-sign-in', 'admins#signin')
 .delete('/admin-sign-out/:id', 'admins#signout')
 .resources('admins', { only: ['index', 'show'] })
