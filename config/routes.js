@@ -16,6 +16,8 @@ module.exports = require('lib/wiring/routes')
 .resources('profiles')
 .resources('carts')
 
+.resources('uploads', {only: ['index','show','create']})
+
 //custom routes
 .get('/owner_orders/:owner', 'orders#showUserOrders')
 .get('/owner_carts/:owner', 'carts#showUserCarts')
