@@ -9,7 +9,7 @@ const multer = require('app/middleware').multer;
 
 const uploader = require('lib/aws-s3-upload');
 
-// const authenticate = require('./concerns/authenticate');
+const authenticate = require('./concerns/authenticate_admin');
 
 const index = (req, res, next) => {
   Product.find()
@@ -80,7 +80,7 @@ const update = (req, res, next) => {
 
 const destroy = (req, res, next) => {
   let search = { _id: req.params.id
-    // , _owner: req.currentUser._id 
+    // , _owner: req.currentUser._id
   };
   Product.findOne(search)
     .then(product => {
@@ -101,6 +101,6 @@ module.exports = controller({
   update,
   destroy,
 }, { before: [
-  // { method: authenticate, except: ['index', 'show'] },
+  { method: authenticate, except: ['index', 'show'] },
   {method: multer.single('product[image]'), only:['create']}
 ], });
