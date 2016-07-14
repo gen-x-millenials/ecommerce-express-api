@@ -29,7 +29,7 @@ const showUserOrders = (req, res, next) => {
 
 const create = (req, res, next) => {
   let order = Object.assign(req.body.order
-    // , { _owner: req.currentUser._id,}
+    , { _owner: req.currentUser._id,}
   );
   Order.create(order)
     .then(function(order){
