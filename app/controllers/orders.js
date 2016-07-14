@@ -5,6 +5,7 @@ const models = require('app/models');
 const Order = models.order;
 
 const authenticate = require('./concerns/authenticate');
+const stripe = require("stripe")("sk_test_PDmUqKt58rH9534YMuzGtQFf");
 
 const index = (req, res, next) => {
   Order.find()
@@ -41,10 +42,20 @@ const create = (req, res, next) => {
     .catch(err => next(err));
 };
 
+// const createCharge = (req, res, next) => {
+//   Order.find()
+//     .then(() => res.sendStatus(200))
+//     .catch(err => next(err));
+// };
+
+// function to create stripe charge
 const createCharge = (req, res, next) => {
-  Order.find()
-    .then(() => res.sendStatus(200))
-    .catch(err => next(err));
+ stripe.charges.create({
+   amount: req.body.amount,
+   currency: "usd",
+   source: req.body.stripeToken,
+ }).then(charge => res.json({ charge }))
+ .catch(err => next(err));
 };
 
 const update = (req, res, next) => {
