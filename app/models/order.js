@@ -26,6 +26,10 @@ const orderSchema = new mongoose.Schema({
   notes: {
     type: String,
   },
+  date_completed: {
+    type: Date,
+    match: /\d{4}-\d{2}-\d{2}/
+  },
   paid: {
     type: Boolean,
   },

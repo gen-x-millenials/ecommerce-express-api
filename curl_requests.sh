@@ -1,6 +1,6 @@
 # sign up
 
-curl --include --request POST https://brewtiq-api.herokuapp.com/sign-in \
+curl --include --request POST https://brewtiq-api.herokuapp.com/admin-sign-up \
   --header "Content-Type: application/json" \
   --data '{
     "credentials": {
@@ -12,12 +12,12 @@ curl --include --request POST https://brewtiq-api.herokuapp.com/sign-in \
 
 #sign in
 
-curl --include --request POST https://brewtiq-api.herokuapp.com/sign-in \
+curl --include --request POST https://brewtiq-api.herokuapp.com/admin-sign-in \
   --header "Content-Type: application/json" \
   --data '{
     "credentials": {
-      "email": "shireen@bean.com",
-      "password": "p"
+      "email": "shireen",
+      "password": "shireen"
     }
   }'
 
