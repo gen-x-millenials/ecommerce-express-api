@@ -4,7 +4,7 @@ const controller = require('lib/wiring/controller');
 const models = require('app/models');
 const Order = models.order;
 
-// const authenticate = require('./concerns/authenticate');
+const authenticate = require('./concerns/authenticate');
 
 const index = (req, res, next) => {
   Order.find()
@@ -87,5 +87,5 @@ module.exports = controller({
   showUserOrders,
   createCharge,
 }, { before: [
-  // { method: authenticate, except: ['index', 'show'] },
+  { method: authenticate, except: ['index', 'show'] },
 ], });
