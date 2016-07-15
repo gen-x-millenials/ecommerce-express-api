@@ -244,7 +244,8 @@ Content-Type: application/json; charset=utf-8
 #### POST /products
 note: only currentAdmin is allowed to perform
 
-curl --include --request POST 'https://brewtiq-api.herokuapp.com/products \
+```sh
+curl --include --request POST 'https://brewtiq-api.herokuapp.com/products' \
 --header "Content-Type: application/json" \
 --header "Authorization: Token token=$TOKEN" \
 --data '{
@@ -256,11 +257,14 @@ curl --include --request POST 'https://brewtiq-api.herokuapp.com/products \
     "price": 15
   }
 }'
+```
 
 #### PATCH /products
+
 note: only currentAdmin is allowed to perform
 
-curl --include --request PATCH 'https://brewtiq-api.herokuapp.com/products \
+```sh
+curl --include --request PATCH 'https://brewtiq-api.herokuapp.com/products' \
 --header "Content-Type: application/json" \
 --header "Authorization: Token token=$TOKEN" \
 --data '{
@@ -270,10 +274,12 @@ curl --include --request PATCH 'https://brewtiq-api.herokuapp.com/products \
     "price": 16
   }
 }'
+```
 
 #### PATCH /products
 note: only currentAdmin is allowed to perform
 
+```sh
 curl --include --request PATCH 'https://brewtiq-api.herokuapp.com/products/ <INSERT PRODUCT ID HERE>
 --header "Authorization: Token token=$TOKEN" \
 --header "Content-Type: application/json" \
@@ -284,12 +290,13 @@ curl --include --request PATCH 'https://brewtiq-api.herokuapp.com/products/ <INS
     "price": 16
   }
 }'
-
+```
 
 
 #### POST /orders
 
-curl --include --request POST http://localhost:3000/orders \
+```sh
+curl --include --request POST 'http://localhost:3000/orders' \
 --header "Content-Type: application/json" \
 --header "Authorization: Token \
 token=OuK4I04EIpwaKGLKllN6XQHs8RvZMJwdcZUBxrBhrGU=--VJYQ89sAj04HwKTF7oDZXZLWSTho8K4gHjtWOdjKEfI=" \
@@ -313,3 +320,4 @@ token=OuK4I04EIpwaKGLKllN6XQHs8RvZMJwdcZUBxrBhrGU=--VJYQ89sAj04HwKTF7oDZXZLWSTho
  "total": 56
 }
 }'
+```
