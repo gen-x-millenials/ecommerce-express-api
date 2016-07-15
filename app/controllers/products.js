@@ -32,6 +32,39 @@ const show = (req, res, next) => {
 //     .catch(err => next(err));
 // };
 
+// const showUserOrders = (req, res, next) => {
+//  Order.find({
+//    _owner: req.params.owner,
+//  })
+//    .then(orders => res.json({ orders }))
+//    .catch(err => next(err));
+// };
+
+const showWine = (req, res, next) => {
+ Product.find({
+   category: "wine",
+ })
+   .then(products => res.json({ products }))
+   .catch(err => next(err));
+};
+
+const showBeer = (req, res, next) => {
+ Product.find({
+   category: "beer",
+ })
+   .then(products => res.json({ products }))
+   .catch(err => next(err));
+};
+
+const showCider = (req, res, next) => {
+ Product.find({
+   category: "cider",
+ })
+   .then(products => res.json({ products }))
+   .catch(err => next(err));
+};
+
+
 const create = (req, res, next) => {
   // let upload = {
   //   comment: req.body.upload.comment,
@@ -100,7 +133,10 @@ module.exports = controller({
   create,
   update,
   destroy,
+  showWine,
+  showBeer,
+  showCider,
 }, { before: [
-  { method: authenticate, except: ['index', 'show'] },
+  { method: authenticate, except: ['showWine','showBeer', 'showCider','index', 'show'] },
   {method: multer.single('product[image]'), only:['create']}
 ], });

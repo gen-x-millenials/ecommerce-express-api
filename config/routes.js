@@ -21,6 +21,9 @@ module.exports = require('lib/wiring/routes')
 .get('/owner_carts/:owner', 'carts#showUserCarts')
 .post('/charge', 'orders#createCharge')
 
+.get('/wine', 'products#showWine')
+.get('/beer', 'products#showBeer')
+.get('/cider', 'products#showCider')
 
 //admin panel
 // .post('/admin-sign-up', 'admins#signup')

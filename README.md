@@ -35,7 +35,10 @@ some pointing to the deployed herokuapp.
 | Verb   |   URI Pattern   |   Controller#Action  |
 |:-------|:----------------|:---------------------|
 | GET    | `/products`     | `products#index`     |
-| GET    | `/products/:id` | `products#show`      |
+| GET    | `/wine`         | `products#showWine`  |
+| GET    | `/beer`         | `products#showBeer`  |
+| GET    | `/cider`        | `products#showCider` |
+| SHOW   | `/products/:id` | `products#show`      |
 | POST   | `/products`     | `products#create`    |
 | PATCH  | `/products/:id` | `products#update`    |
 | DELETE | `/products/:id` | `products#destroy`   |
