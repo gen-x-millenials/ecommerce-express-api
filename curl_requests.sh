@@ -82,6 +82,7 @@ curl --include --request POST https://brewtiq-api.herokuapp.com/orders \
 
 curl --include --request POST http://localhost:3000/carts \
 --header "Content-Type: application/json" \
+--header "Authorization: Token token=OuK4I04EIpwaKGLKllN6XQHs8RvZMJwdcZUBxrBhrGU=--VJYQ89sAj04HwKTF7oDZXZLWSTho8K4gHjtWOdjKEfI=" \
 --data '{
 "cart": {
  "_owner": "5786a2ff2c29d3120029b418",
@@ -107,6 +108,7 @@ curl --include --request POST http://localhost:3000/carts \
 
 curl --include --request POST http://localhost:3000/orders \
 --header "Content-Type: application/json" \
+--header "Authorization: Token token=OuK4I04EIpwaKGLKllN6XQHs8RvZMJwdcZUBxrBhrGU=--VJYQ89sAj04HwKTF7oDZXZLWSTho8K4gHjtWOdjKEfI=" \
 --data '{
 "order": {
   "items": [
