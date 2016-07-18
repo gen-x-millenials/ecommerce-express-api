@@ -14,12 +14,22 @@ module.exports = require('../lib/wiring/routes')
 .resources('orders')
 .resources('products')
 .resources('profiles')
+.resources('carts')
+
+//custom routes
+.get('/owner_orders/:owner', 'orders#showUserOrders')
+.get('/owner_carts/:owner', 'carts#showUserCarts')
+.post('/charge', 'orders#createCharge')
+
+.get('/wine', 'products#showWine')
+.get('/beer', 'products#showBeer')
+.get('/cider', 'products#showCider')
 
 //uploads
 .resources('uploads', { only: ['index', 'show', 'create'] })
 
 //admin panel
-.post('/admin-sign-up', 'admins#signup')
+// .post('/admin-sign-up', 'admins#signup')
 .post('/admin-sign-in', 'admins#signin')
 .delete('/admin-sign-out/:id', 'admins#signout')
 .resources('admins', { only: ['index', 'show'] })

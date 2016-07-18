@@ -4,7 +4,8 @@ const controller = require('../../lib/wiring/controller');
 const models = require('../models');
 const Order = models.order;
 
-// const authenticate = require('./concerns/authenticate');
+const authenticate = require('./concerns/authenticate');
+const stripe = require("stripe")("sk_test_PDmUqKt58rH9534YMuzGtQFf");
 
 const index = (req, res, next) => {
   Order.find()
@@ -18,19 +19,43 @@ const show = (req, res, next) => {
     .catch(err => next(err));
 };
 
+const showUserOrders = (req, res, next) => {
+ Order.find({
+   _owner: req.params.owner,
+ })
+   .then(orders => res.json({ orders }))
+   .catch(err => next(err));
+};
+
 const create = (req, res, next) => {
   let order = Object.assign(req.body.order
-    // , { _owner: req.currentUser._id,}
+    , { _owner: req.currentUser._id,}
   );
   Order.create(order)
     .then(function(order){
       if (order.total_validation !== true ){
-        throw Error('Invalid Total')
+        throw Error('Invalid Total');
       }
-      return order
+      return order;
     })
     .then(order => res.json({ order }))
     .catch(err => next(err));
+};
+
+// const createCharge = (req, res, next) => {
+//   Order.find()
+//     .then(() => res.sendStatus(200))
+//     .catch(err => next(err));
+// };
+
+// function to create stripe charge
+const createCharge = (req, res, next) => {
+ stripe.charges.create({
+   amount: req.body.amount,
+   currency: "usd",
+   source: req.body.stripeToken,
+ }).then(charge => res.json({ charge }))
+ .catch(err => next(err));
 };
 
 const update = (req, res, next) => {
@@ -70,6 +95,8 @@ module.exports = controller({
   create,
   update,
   destroy,
+  showUserOrders,
+  createCharge,
 }, { before: [
-  // { method: authenticate, except: ['index', 'show'] },
+  { method: authenticate, except: ['index', 'show'] },
 ], });
